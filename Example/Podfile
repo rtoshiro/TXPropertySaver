@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'TXPropertySaver_Example', :exclusive => true do
+  pod "TXPropertySaver", :path => "../"
+end
+
+target 'TXPropertySaver_Tests', :exclusive => true do
+  pod "TXPropertySaver", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end
