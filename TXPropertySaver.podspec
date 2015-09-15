@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "TXPropertySaver"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of TXPropertySaver."
+  s.version          = "1.0.0"
+  s.summary          = "UIView cateogory to save (and load) all current properties values."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,13 +17,14 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+UIView cateogory to save (and load) all current properties values.
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/TXPropertySaver"
+  s.homepage         = "https://github.com/rtoshiro/TXPropertySaver"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "rtoshiro" => "rtoshiro@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/TXPropertySaver.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/rtoshiro/TXPropertySaver.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
