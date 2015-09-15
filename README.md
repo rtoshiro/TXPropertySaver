@@ -41,7 +41,6 @@ Not all properties are saved. Here is the list of properties that are being save
 - autoresizingMask
 - autoresizesSubviews
 - contentMode
-- contentStretch
 - contentScaleFactor
 - tag
 

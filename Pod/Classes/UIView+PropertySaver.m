@@ -147,7 +147,7 @@ static const int kDataContainerKey;
     data.autoresizingMask = self.autoresizingMask;
     data.autoresizesSubviews = self.autoresizesSubviews;
     data.contentMode = self.contentMode;
-    data.contentStretch = self.contentStretch;
+//    data.contentStretch = self.contentStretch;
 
     data.contentScaleFactor = self.contentScaleFactor;
 
@@ -193,7 +193,7 @@ static const int kDataContainerKey;
         self.autoresizingMask = view.autoresizingMask;
         self.autoresizesSubviews = view.autoresizesSubviews;
         self.contentMode = view.contentMode;
-        self.contentStretch = view.contentStretch;
+//        self.contentStretch = view.contentStretch;
 
         self.contentScaleFactor = view.contentScaleFactor;
 
