@@ -12,5 +12,6 @@
 
 - (BOOL)saveProperties;
 - (BOOL)loadProperties;
+- (UIView *)savedProperties;
 
 @end

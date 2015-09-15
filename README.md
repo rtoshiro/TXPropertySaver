@@ -13,6 +13,38 @@ And then, when you want to load all properties back, you can call:
 [self.mysomeview loadProperties];
 ```
 
+If you want to access saved properties, you can call:
+
+```
+UIView *savedProperties = [self.mysomeview savedProperties];
+```
+
+And access the ```savedProperties``` properties.
+
+## Properties
+
+Not all properties are saved. Here is the list of properties that are being saved:
+
+- backgroundColor
+- hidden
+- alpha
+- opaque
+- clipsToBounds
+- clearsContextBeforeDrawing
+- userInteractionEnabled
+- multipleTouchEnabled
+- exclusiveTouch
+- frame
+- bounds
+- center
+- transform
+- autoresizingMask
+- autoresizesSubviews
+- contentMode
+- contentStretch
+- contentScaleFactor
+- tag
+
 ## Installation
 
 TXPropertySaver is available through [CocoaPods](http://cocoapods.org). To install

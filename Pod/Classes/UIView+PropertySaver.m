@@ -11,23 +11,105 @@
 
 static const int kDataContainerKey;
 
-@interface TXDataContainer : NSObject
-
-@property (nonatomic, strong) NSData *data;
+@interface TXPropertyView : UIView
 
 @end
 
-@implementation TXDataContainer
+@implementation TXPropertyView
+
+- (UIView *)maskView
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (UIColor *)tintColor
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (UIViewTintAdjustmentMode)tintAdjustmentMode
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (NSArray *)motionEffects
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (NSString *)restorationIdentifier
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (UIView *)superview
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (NSArray *)subviews
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (UIWindow *)window
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (CALayer *)layer
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (UIEdgeInsets)layoutMargins
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (BOOL)preservesSuperviewLayoutMargins
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
+
+- (NSArray *)gestureRecognizers
+{
+  @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
+                               userInfo:nil];
+}
 
 @end
 
 @implementation UIView (PropertySaver)
 
-- (TXDataContainer *)dataContainer
+- (TXPropertyView *)dataContainer
 {
-  TXDataContainer *properties = objc_getAssociatedObject(self, &kDataContainerKey);
+  TXPropertyView *properties = objc_getAssociatedObject(self, &kDataContainerKey);
   if ( !properties ) {
-    properties = [[TXDataContainer alloc] init];
+    properties = [[TXPropertyView alloc] init];
     objc_setAssociatedObject(self, &kDataContainerKey, properties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 #if !__has_feature(objc_arc)
     [properties release];
@@ -36,11 +118,41 @@ static const int kDataContainerKey;
   return properties;
 }
 
+- (UIView *)savedProperties
+{
+  return [self dataContainer];
+}
+
 - (BOOL)saveProperties
 {
   @try {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
-    [self dataContainer].data = data;
+    TXPropertyView *data = [self dataContainer];
+    
+    data.backgroundColor = self.backgroundColor;
+    data.hidden = self.hidden;
+    data.alpha = self.alpha;
+    data.opaque = self.opaque;
+    data.clipsToBounds = self.clipsToBounds;
+    data.clearsContextBeforeDrawing = self.clearsContextBeforeDrawing;
+    
+    data.userInteractionEnabled = self.userInteractionEnabled;
+    data.multipleTouchEnabled = self.multipleTouchEnabled;
+    data.exclusiveTouch = self.exclusiveTouch;
+    
+    data.frame = self.frame;
+    data.bounds = self.bounds;
+    data.center = self.center;
+    data.transform = self.transform;
+    
+    data.autoresizingMask = self.autoresizingMask;
+    data.autoresizesSubviews = self.autoresizesSubviews;
+    data.contentMode = self.contentMode;
+    data.contentStretch = self.contentStretch;
+
+    data.contentScaleFactor = self.contentScaleFactor;
+
+    data.tag = self.tag;
+    
     return YES;
   }
   @catch (NSException *exception) {
@@ -54,10 +166,10 @@ static const int kDataContainerKey;
 
 - (BOOL)loadProperties
 {
-  if ([self dataContainer] && [self dataContainer].data)
+  if ([self dataContainer])
   {
     @try {
-      UIView *view = [NSKeyedUnarchiver unarchiveObjectWithData:[self dataContainer].data];
+      TXPropertyView *view = [self dataContainer];
       if (view)
       {
         NSLog(@"view %@", view);
@@ -66,11 +178,8 @@ static const int kDataContainerKey;
         self.hidden = view.hidden;
         self.alpha = view.alpha;
         self.opaque = view.opaque;
-        self.tintColor = view.tintColor;
-        self.tintAdjustmentMode = view.tintAdjustmentMode;
         self.clipsToBounds = view.clipsToBounds;
         self.clearsContextBeforeDrawing = view.clearsContextBeforeDrawing;
-        self.maskView = view.maskView;
         
         self.userInteractionEnabled = view.userInteractionEnabled;
         self.multipleTouchEnabled = view.multipleTouchEnabled;
@@ -85,16 +194,9 @@ static const int kDataContainerKey;
         self.autoresizesSubviews = view.autoresizesSubviews;
         self.contentMode = view.contentMode;
         self.contentStretch = view.contentStretch;
-        
-        self.layoutMargins = view.layoutMargins;
-        self.preservesSuperviewLayoutMargins = view.preservesSuperviewLayoutMargins;
-        
+
         self.contentScaleFactor = view.contentScaleFactor;
-        self.gestureRecognizers = view.gestureRecognizers;
-        
-        self.motionEffects = view.motionEffects;
-        self.restorationIdentifier = view.restorationIdentifier;
-        
+
         self.tag = view.tag;
         
         return YES;
