@@ -1,0 +1,6 @@
+framework module TXPropertySaver {
+  umbrella header "Pods-TXPropertySaver_Example-TXPropertySaver-umbrella.h"
+
+  export *
+  module * { export * }
+}

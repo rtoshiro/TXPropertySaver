@@ -1,0 +1,6 @@
+framework module Pods_TXPropertySaver_Tests {
+  umbrella header "Pods-TXPropertySaver_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
