@@ -9,108 +9,24 @@
 #import <objc/runtime.h>
 #import "UIView+PropertySaver.h"
 
-static const int kDataContainerKey;
+static const int ksavedPropertiesKey;
 
-@interface TXPropertyView : UIView
+@interface TXsavedProperties : UIView
 
 @end
 
-@implementation TXPropertyView
-
-- (UIView *)maskView
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (UIColor *)tintColor
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (UIViewTintAdjustmentMode)tintAdjustmentMode
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (NSArray *)motionEffects
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (NSString *)restorationIdentifier
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (UIView *)superview
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (NSArray *)subviews
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (UIWindow *)window
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (CALayer *)layer
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (UIEdgeInsets)layoutMargins
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (BOOL)preservesSuperviewLayoutMargins
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
-
-- (NSArray *)gestureRecognizers
-{
-  @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Cannot save %@ property", NSStringFromSelector(_cmd)]
-                               userInfo:nil];
-}
+@implementation TXsavedProperties
 
 @end
 
 @implementation UIView (PropertySaver)
 
-- (TXPropertyView *)dataContainer
+- (UIView *)savedProperties
 {
-  TXPropertyView *properties = objc_getAssociatedObject(self, &kDataContainerKey);
+  TXsavedProperties *properties = objc_getAssociatedObject(self, &ksavedPropertiesKey);
   if ( !properties ) {
-    properties = [[TXPropertyView alloc] init];
-    objc_setAssociatedObject(self, &kDataContainerKey, properties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    properties = [[TXsavedProperties alloc] init];
+    objc_setAssociatedObject(self, &ksavedPropertiesKey, properties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 #if !__has_feature(objc_arc)
     [properties release];
 #endif
@@ -118,15 +34,10 @@ static const int kDataContainerKey;
   return properties;
 }
 
-- (UIView *)savedProperties
-{
-  return [self dataContainer];
-}
-
 - (BOOL)saveProperties
 {
   @try {
-    TXPropertyView *data = [self dataContainer];
+    TXsavedProperties *data = (TXsavedProperties *)[self savedProperties];
     
     data.backgroundColor = self.backgroundColor;
     data.hidden = self.hidden;
@@ -166,10 +77,10 @@ static const int kDataContainerKey;
 
 - (BOOL)loadProperties
 {
-  if ([self dataContainer])
+  if ([self savedProperties])
   {
     @try {
-      TXPropertyView *view = [self dataContainer];
+      TXsavedProperties *view = (TXsavedProperties *)[self savedProperties];
       if (view)
       {
         NSLog(@"view %@", view);
