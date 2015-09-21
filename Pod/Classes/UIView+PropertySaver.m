@@ -13,6 +13,8 @@ static const int ksavedPropertiesKey;
 
 @interface TXsavedProperties : UIView
 
+@property (nonatomic, assign) BOOL saved;
+
 @end
 
 @implementation TXsavedProperties
@@ -64,6 +66,8 @@ static const int ksavedPropertiesKey;
 
     data.tag = self.tag;
     
+    data.saved = YES;
+    
     return YES;
   }
   @catch (NSException *exception) {
@@ -81,7 +85,7 @@ static const int ksavedPropertiesKey;
   {
     @try {
       TXsavedProperties *view = (TXsavedProperties *)[self savedProperties];
-      if (view)
+      if (view && view.saved)
       {
         NSLog(@"view %@", view);
         

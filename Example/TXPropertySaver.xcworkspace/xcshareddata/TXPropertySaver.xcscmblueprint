@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1E3DB03B05414E85A864DD64A7DB186F50AF9AFC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "ba156859-9f85-4971-86de-2e3f79c13a09" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1E3DB03B05414E85A864DD64A7DB186F50AF9AFC" : 0,
+    "ba156859-9f85-4971-86de-2e3f79c13a09" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1B80AC93-5512-4179-937A-C2E2DF3B2D83",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1E3DB03B05414E85A864DD64A7DB186F50AF9AFC" : "TXPropertySaver\/",
+    "ba156859-9f85-4971-86de-2e3f79c13a09" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TXPropertySaver",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/TXPropertySaver.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rtoshiro\/TXPropertySaver.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1E3DB03B05414E85A864DD64A7DB186F50AF9AFC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/kongros.svn.cloudforge.com\/voltemios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ba156859-9f85-4971-86de-2e3f79c13a09"
+    }
+  ]
+}
